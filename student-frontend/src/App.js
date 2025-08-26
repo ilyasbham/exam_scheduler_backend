@@ -3,12 +3,16 @@ import AddStudent from "./components/AddStudent";
 import StudentList from "./components/StudentList";
 import AddDepartment from "./components/AddDepartment";
 import DepartmentList from "./components/DepartmentList";
+import AddResearchAssistant from "./components/AddResearchAssistant";
+import ResearchAssistantList from "./components/ResearchAssistantList";
 import { Container, Button, ButtonGroup } from "react-bootstrap";
 
 function App() {
   const [students, setStudents] = useState([]);
   const [departments, setDepartments] = useState([]);
-  const [activeTab, setActiveTab] = useState("students"); // 'students' or 'departments'
+  const [researchAssistants, setResearchAssistants] = useState([]);
+  const [activeTab, setActiveTab] = useState("students"); 
+  // possible values: 'students', 'departments', 'researchAssistants'
 
   // Student handlers
   const handleAddStudent = (student) => {
@@ -18,6 +22,11 @@ function App() {
   // Department handlers
   const handleAddDepartment = (department) => {
     setDepartments([...departments, department]);
+  };
+
+  // Research Assistant handlers
+  const handleAddResearchAssistant = (ra) => {
+    setResearchAssistants([...researchAssistants, ra]);
   };
 
   return (
@@ -37,6 +46,12 @@ function App() {
         >
           Departments
         </Button>
+        <Button
+          variant={activeTab === "researchAssistants" ? "primary" : "outline-primary"}
+          onClick={() => setActiveTab("researchAssistants")}
+        >
+          Research Assistants
+        </Button>
       </ButtonGroup>
 
       {activeTab === "students" && (
@@ -52,8 +67,16 @@ function App() {
           <DepartmentList departments={departments} />
         </>
       )}
+
+      {activeTab === "researchAssistants" && (
+        <>
+          <AddResearchAssistant onAdd={handleAddResearchAssistant} />
+          <ResearchAssistantList researchAssistants={researchAssistants} />
+        </>
+      )}
     </Container>
   );
 }
 
 export default App;
+
