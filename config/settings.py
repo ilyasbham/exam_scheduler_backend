@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     "classroom",
     "course",
     "exam",
-    "student_exam"
+    "student_exam",
+    "exam_assignment"
     
 
 ]
